@@ -1,0 +1,9 @@
+[submodule "openmvg"]
+	path = openmvg
+	url = https://github.com/openMVG/openMVG.git
+[submodule "openmvs"]
+	path = openmvs
+	url = https://github.com/cdcseacave/openMVS.git
+[submodule "vcg"]
+	path = vcg
+	url = https://github.com/cdcseacave/VCG.git
