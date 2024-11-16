@@ -69,7 +69,7 @@ ENV VCG_ROOT="/home/sfmop/vcg"
 WORKDIR /home/sfmop/openmvs
 RUN mkdir make; \
     cd make; \
-    cmake ..; \
+    cmake .. -DCMAKE_BUILD_TYPE=Release; \
     cmake --build . -j4;
 
 WORKDIR /home/sfmop/
