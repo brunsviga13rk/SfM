@@ -77,6 +77,10 @@ WORKDIR /home/sfmop/
 
 FROM ubuntu:jammy AS runtime
 
+LABEL org.opencontainers.image.source=https://github.com/brunsviga13rk/SfM
+LABEL org.opencontainers.image.description="OpenMVG and OpenMVS SfM container"
+LABEL org.opencontainers.image.licenses=MIT
+
 RUN useradd -ms /bin/bash -u 1000 sfmop
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata; \
