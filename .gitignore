@@ -4,3 +4,4 @@ png/
 jpg/
 # default output folder name
 output/
+*.tar.gz

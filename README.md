@@ -81,3 +81,18 @@ make run
 
 The finished 3D model will be stored in
 `output/reconstruction_sequential/scene.ply`.
+
+## Dataset
+
+The data set can be downloaded from
+[here](https://cloud.montehaselino.de/s/bfGSCZ58R8JBN5a).
+In order to not blow up the repository size these images are not included by
+default as the entire dataset has a size of roughly 4 Gb.
+I highly recommend to *only use download the JPG dataset* from
+[here](https://cloud.montehaselino.de/s/WFXnTMigBmaLWzg) as this is only a few
+megabytes in size.
+
+You can use the following to download, extract and setup the dataset:
+```
+make pull
+```

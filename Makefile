@@ -21,3 +21,10 @@ convert:
 	mkdir jpg
 	cd png
 	for i in *.png ; do magick convert "$i" "../jpg/${i%.*}.jpg" ; done
+
+# Download the JPG dataset and extract into folder `jpg`.
+# NOTE: link may change in future.
+pull:
+	curl -SL https://cloud.montehaselino.de/s/WFXnTMigBmaLWzg/download/dataset-jpg.tar.gz > dataset.tar.gz
+	mkdir jpg || true
+	tar xvf dataset.tar.gz --directory=jpg
