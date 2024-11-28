@@ -92,6 +92,10 @@ I highly recommend to *only use download the JPG dataset* from
 [here](https://cloud.montehaselino.de/s/WFXnTMigBmaLWzg) as this is only a few
 megabytes in size.
 
+Please take note that the dataset is licensed under CC BY-NC-SA 4.0.
+A copy of this license is included in this repository as:
+`DATASET_LICENSE` for further information.
+
 You can use the following to download, extract and setup the dataset:
 ```
 make pull
