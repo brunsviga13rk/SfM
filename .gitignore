@@ -1,0 +1,6 @@
+# dataset folder names used during development
+raw/
+png/
+jpg/
+# default output folder name
+output/
