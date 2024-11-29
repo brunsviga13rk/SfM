@@ -100,3 +100,26 @@ You can use the following to download, extract and setup the dataset:
 ```
 make pull
 ```
+
+## Repository Automation
+
+This repository contains automated actions for both building the Docker image
+and automatically reconstructing the model.
+
+### Image Build
+
+In order to build the Docker image push a tag to the remote repository. This
+will trigger a build action that will build the image and name it after the
+repository and additionally tagging it with the tags name. Tagging a branch
+with `v1.2.4` will cause the action to build and push a Docker image to the
+GHCR under: `ghcr.io/brunsviga13rk/sfm:v1.2.4`. This can be skipped by writing
+`Skip-Container-Build` into the HEAD commit message.
+
+### Reconstruction
+
+Whenever a push is done to the `main` branch the action will check if the HEAD
+commit contains a message like: `Run-Reconstruct: v7.3.9`. In this case
+the action will pull the image tagged by the version given in the previous
+message and use this to reconstruct a 3D mesh. Upon success a release will be
+created. Note that a release is only created in case the reconstruction is
+triggered for a tag.
