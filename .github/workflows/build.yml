@@ -1,6 +1,8 @@
 name: Build and Push to GHCR
 on:
     push:
+        branches:
+            - main
         tags:
             - v*
 env:
@@ -9,6 +11,9 @@ env:
 jobs:
     build:
         runs-on: ubuntu-latest
+        if: >
+            (! contains(github.event.head_commit.message, 'Skip-Container-Build')) &&
+            (startsWith(github.ref, 'refs/tags/'))
         permissions:
             contents: read
             packages: write
@@ -35,3 +40,41 @@ jobs:
                   push: true
                   tags: ${{ steps.meta.outputs.tags }}
                   labels: ${{ steps.meta.outputs.labels }}
+    recon:
+        runs-on: ubuntu-latest
+        if: contains(github.event.head_commit.message, 'Run-Reconstruct')
+        needs: build
+        permissions:
+            contents: read
+            packages: write
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  submodules: false
+            - name: Extract Version
+              id: infer_version
+              run: |
+                  export VERSION=$(echo "${COMMIT_MESSAGE}" | grep -Po '(?<=Run-Reconstruct: )v\d+\.\d+\.\d+')
+                  echo "Running release action on version $VERSION"
+                  echo "version=$VERSION" >> $GITHUB_OUTPUT
+            - name: Pull Docker Image
+              run: docker pull ${{ env.IMAGE_NAME }}:${{ steps.infer_version.outputs.version }}
+            - name: Pull Dataset
+              run: make pull
+            - name: Reconnstruct Brunsviga 13 RK
+              run: make run
+            - name: Prepare Release
+              run: |
+                  cp output/reconstruction_sequential/scene.ply Model.ply
+                  touch Release.txt
+                  echo "tag: ${{ github.ref_name }}" >> Release.txt
+                  echo "sha: ${{ github.sha }}" >> Release.txt
+            - name: Release 3D Model
+              uses: softprops/action-gh-release@v2
+              if: startsWith(github.ref, 'refs/tags/')
+              with:
+                  files: |
+                      dataset.tar.gz
+                      Model.ply
+                      Release.txt
