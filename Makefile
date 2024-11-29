@@ -1,8 +1,10 @@
 
+include .env
+
 build:
 	# I discourage from building this image by yourself due to its size
 	# and excruciating compilation time.
-	docker build --tag ghcr.io/brunsviga13rk/sfm:git .
+	docker build --tag "${IMAGE_NAME}:${IMAGE_TAG}" .
 
 run:
 	mkdir output || true
@@ -11,7 +13,7 @@ run:
 	docker run -it \
 	    -v "./jpg:/home/sfmop/dataset" \
 		-v "./output:/home/sfmop/sparse_reconstruction" \
-	    ghcr.io/brunsviga13rk/sfm:git
+	    "${IMAGE_NAME}:${IMAGE_TAG}"
 
 # Convert PNG to JPEG files.
 # Used to convert the compression lossless PNG based dataset since
@@ -25,6 +27,7 @@ convert:
 # Download the JPG dataset and extract into folder `jpg`.
 # NOTE: link may change in future.
 pull:
-	curl -SL https://cloud.montehaselino.de/s/WFXnTMigBmaLWzg/download/dataset-jpg.tar.gz > dataset.tar.gz
+	curl -SL "${DATASET_URL}" > dataset.tar.gz
+	echo "${DATASET_SHA} *dataset.tar.gz" | sha1sum -c -
 	mkdir jpg || true
 	tar xvf dataset.tar.gz --directory=jpg
