@@ -68,7 +68,7 @@ jobs:
               run: |
                   sed -i "/IMAGE_TAG/c\IMAGE_TAG=\"${{ steps.infer_version.outputs.version }}\"" .env
                   mkdir output
-                  chown 1000:1000 output
+                  sudo chown 1000:1000 output
                   make run
             - name: Prepare Release
               run: |
