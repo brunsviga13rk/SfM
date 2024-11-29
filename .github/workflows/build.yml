@@ -7,7 +7,7 @@ on:
             - v*
 env:
     REGISTRY: ghcr.io
-    IMAGE_NAME: ${{ github.repository }}
+    IMAGE_NAME: brunsviga13rk/sfm
 jobs:
     build:
         runs-on: ubuntu-latest
