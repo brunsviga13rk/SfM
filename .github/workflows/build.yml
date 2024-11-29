@@ -42,7 +42,7 @@ jobs:
                   labels: ${{ steps.meta.outputs.labels }}
     recon:
         runs-on: ubuntu-latest
-        if: contains(github.event.head_commit.message, 'Run-Reconstruct')
+        if: ${{ (!cancelled()) && contains(github.event.head_commit.message, 'Run-Reconstruct') }}
         needs: build
         permissions:
             contents: read
