@@ -61,7 +61,7 @@ jobs:
                   echo "Running release action on version $VERSION"
                   echo "version=$VERSION" >> $GITHUB_OUTPUT
             - name: Pull Docker Image
-              run: docker pull ${{ env.IMAGE_NAME }}:${{ steps.infer_version.outputs.version }}
+              run: docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.infer_version.outputs.version }}
             - name: Pull Dataset
               run: make pull
             - name: Reconnstruct Brunsviga 13 RK
