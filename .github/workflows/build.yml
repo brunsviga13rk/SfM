@@ -54,6 +54,8 @@ jobs:
                   submodules: false
             - name: Extract Version
               id: infer_version
+              env:
+                  COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
               run: |
                   export VERSION=$(echo "${COMMIT_MESSAGE}" | grep -Po '(?<=Run-Reconstruct: )v\d+\.\d+\.\d+')
                   echo "Running release action on version $VERSION"
