@@ -63,7 +63,9 @@ jobs:
             - name: Pull Dataset
               run: make pull
             - name: Reconnstruct Brunsviga 13 RK
-              run: make run
+              run: |
+                  sed -i "/IMAGE_TAG/c\IMAGE_TAG=\"${VERSION}\"" .env
+                  make run
             - name: Prepare Release
               run: |
                   cp output/reconstruction_sequential/scene.ply Model.ply
