@@ -10,7 +10,7 @@ run:
 	mkdir output || true
 	# Start SfM container, mount the dataset and the output directory.
 	# Then start the full automatic reconstruction pipeline.
-	docker run -it \
+	docker run \
 	    -v "./jpg:/home/sfmop/dataset" \
 		-v "./output:/home/sfmop/sparse_reconstruction" \
 	    "${IMAGE_NAME}:${IMAGE_TAG}"
