@@ -30,4 +30,4 @@ pull:
 	curl -SL "${DATASET_URL}" > dataset.tar.gz
 	echo "${DATASET_SHA} *dataset.tar.gz" | sha1sum -c -
 	mkdir jpg || true
-	tar xvf dataset.tar.gz --directory=jpg
+	tar xvf dataset.tar.gz
