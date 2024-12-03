@@ -45,7 +45,7 @@ jobs:
         if: ${{ (!cancelled()) && contains(github.event.head_commit.message, 'Run-Reconstruct') }}
         needs: build
         permissions:
-            contents: read
+            contents: write
             packages: write
         steps:
             - name: Checkout
