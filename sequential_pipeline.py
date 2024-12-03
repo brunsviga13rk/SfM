@@ -29,7 +29,6 @@ if __name__ == '__main__':
     logger = logging.getLogger(__name__)
 
     if len(sys.argv) < 3:
-        print ("Usage %s image_dir output_dir" % sys.argv[0])
         sys.exit(1)
 
     input_dir = sys.argv[1]
